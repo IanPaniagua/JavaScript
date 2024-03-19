@@ -34,26 +34,47 @@
 
 // EJERCICIO
 
+'use strict';
+
+// Function to update the list of movies
+function updateMovieList() {
+    var ul = document.querySelector('#peliculas__list');
+    ul.innerHTML = ""; // Clear the existing list
+
+    for (var i in localStorage) {
+        if (typeof localStorage[i] == 'string') {
+            var li = document.createElement("li");
+            li.textContent = localStorage[i];
+            ul.appendChild(li);
+        }
+    }
+}
+
+// Event listener for adding a movie
 var formulario = document.querySelector("#formpeliculas");
-
-formulario.addEventListener('submit', function(){
-    console.log("entra");
-
+formulario.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
 
     var titulo = document.querySelector('#addpelicula').value;
 
-    if(titulo.length >= 1){
+    if (titulo.length >= 1) {
         localStorage.setItem(titulo, titulo);
+        updateMovieList(); // Update the list of movies
     }
-
 });
-var ul = document.querySelector('#peliculas__list')
-for(var i in localStorage){
-    console.log(localStorage[i]);
-    if(typeof(localStorage[i] == 'string'))
-    var li = document.createElement("li");
-    li.append(localStorage[i]);
-    ul.append(li);
 
-}
+// Event listener for deleting a movie
+var formularioDel = document.querySelector("#formDelFilm");
+formularioDel.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission
 
+    var titulo = document.querySelector('#delFilm').value;
+
+    if (titulo.length >= 1) {
+        localStorage.removeItem(titulo);
+        updateMovieList(); // Update the list of movies
+    }
+});
+
+// Initial update of the movie list on page load
+updateMovieList();
