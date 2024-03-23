@@ -52,5 +52,5 @@ var Sudadera = /** @class */ (function (_super) {
 }(Camiseta));
 var sudadera_nike = new Sudadera();
 sudadera_nike.setCapucha(true);
-sudadera_nike.setPrecio(15);
+sudadera_nike.setPrecio(15); //Metodo heredado
 console.log(sudadera_nike);
