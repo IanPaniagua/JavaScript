@@ -4,8 +4,18 @@ interface CamisetaBase {
     getPrecio():number;
 } //estos dos metodos tienen que estar en la clase, es una especie de requisito
 
+// Decorador
+function estampar(logo: string){
+    return function(target: Function){
+        target.prototype.estampacion = function():void{
+            console.log("Camiseta estampada con el logo de: " + logo)
+        }
+    }
+}
+
 
 // Clase (molde del objeto)
+@estampar('Gucci Gang')    //aplicando el Decorador
 // export class Camiseta 
 class Camiseta implements CamisetaBase{
 
@@ -36,6 +46,7 @@ class Camiseta implements CamisetaBase{
 
 // Uso de la clase
 var camiseta = new Camiseta("Rojo", "Tirantes", "Nike", "S", 10);
+camiseta.estampacion();
 console.log(camiseta);
 
 // HERENCIA
